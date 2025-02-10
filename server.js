@@ -41,13 +41,13 @@ app.use("/api/comments", comments);
 app.use("/api/messages", messages);
 
 // Serve Frontend in Production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
+//if (process.env.NODE_ENV === "production") {
+  //app.use(express.static(path.join(__dirname, "/client/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
+  //app.get("*", (req, res) => {
+  //  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  //});
+//}
 
 // Start Server
 httpServer.listen(process.env.PORT || 4000, () => {
