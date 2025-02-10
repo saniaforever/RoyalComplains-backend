@@ -8,12 +8,12 @@ const Footer = () => {
     <Box pb={3}>
       <Card>
         <Typography variant="subtitle1">
-          Don't forget to star the{" "}
+          Connect with Sania on LinkedIn{" "}
           <a
-            href="https://github.com/ihtasham42/social-media-app"
+            href="https://www.linkedin.com/in/sania-mukadam-181814265"
             target="_blank"
           >
-            Repo
+            LinkedIn
           </a>
           ! ⭐
         </Typography>
