@@ -43,6 +43,8 @@ app.use("/api/users", users);
 app.use("/api/comments", comments);
 app.use("/api/messages", messages);
 
+console.log("✅ API Routes Loaded Successfully"); // Debugging Route Issues
+
 // Root Route (Check if Backend is Running)
 app.get("/", (req, res) => {
   res.send("✅ Royal Complains API is Live!");
