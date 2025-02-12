@@ -19,20 +19,23 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = socketIO(httpServer, {
   cors: {
-    origin: ["http://localhost:3000", "https://post-it-heroku.herokuapp.com"],
+    origin: ["http://localhost:3000", "https://royalcomplains.onrender.com"],
   },
 });
 
 // WebSockets
 io.use(authSocket);
-io.on("connection", (socket) => socketServer(socket));
+io.on("connection", (socket) => {
+  console.log("🔗 New WebSocket Connection");
+  socketServer(socket);
+});
 
 // Connect to MongoDB Atlas
 connectDB(); // ✅ Call the database connection function
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" })); // Allow all origins
 
 // API Routes
 app.use("/api/posts", posts);
@@ -40,16 +43,13 @@ app.use("/api/users", users);
 app.use("/api/comments", comments);
 app.use("/api/messages", messages);
 
-// Serve Frontend in Production
-//if (process.env.NODE_ENV === "production") {
-  //app.use(express.static(path.join(__dirname, "/client/build")));
-
-  //app.get("*", (req, res) => {
-  //  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  //});
-//}
+// Root Route (Check if Backend is Running)
+app.get("/", (req, res) => {
+  res.send("✅ Royal Complains API is Live!");
+});
 
 // Start Server
-httpServer.listen(process.env.PORT || 4000, () => {
-  console.log("🚀 Server Running on Port", process.env.PORT || 4000);
+const PORT = process.env.PORT || 4000;
+httpServer.listen(PORT, () => {
+  console.log(`🚀 Server Running on Port ${PORT}`);
 });
